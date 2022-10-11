@@ -25,6 +25,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/dashboard', function () {
+    ray('Olá debbug!');
     return Inertia::render('Dashboard', [
         'title' => 'Dashboard'
     ]);
@@ -38,6 +39,12 @@ Route::get('/account', function () {
 
 Route::post('/notify/{type}', function ($type) {
     return back()->toast('This notification comes from the server side =)', $type);
+});
+
+Route::post('/notify2/{type}', function ($type) {
+    return back()
+    ->toast('This notification comes from the server side =)', $type)
+    ->toast('Esse é um warning =)', 'warning');
 });
 
 Route::get('/dialog/{type}/{position?}', function ($type, $position = null) {
