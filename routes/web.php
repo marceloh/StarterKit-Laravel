@@ -31,11 +31,16 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/account', function () {
-    return Inertia::render('Account', [
-        'title' => 'My Account'
-    ]);
-})->middleware(['auth', 'verified'])->name('account.index');
+// Route::get('/account', function () {
+//     return Inertia::render('Account', [
+//         'title' => 'My Account'
+//     ]);
+// })->middleware(['auth', 'verified'])->name('account.index');
+
+// Route::get('/account', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('account.index');
+
+Route::get('/account', 'App\Http\Controllers\UserController@index')->middleware(['auth', 'verified'])->name('account.index');
+Route::post('/account', 'App\Http\Controllers\UserController@store')->middleware(['auth', 'verified'])->name('account.store');
 
 Route::post('/notify/{type}', function ($type) {
     return back()->toast('This notification comes from the server side =)', $type);
@@ -43,8 +48,8 @@ Route::post('/notify/{type}', function ($type) {
 
 Route::post('/notify2/{type}', function ($type) {
     return back()
-    ->toast('This notification comes from the server side =)', $type)
-    ->toast('Esse é um warning =)', 'warning');
+        ->toast('This notification comes from the server side =)', $type)
+        ->toast('Esse é um warning =)', 'warning');
 });
 
 Route::get('/dialog/{type}/{position?}', function ($type, $position = null) {

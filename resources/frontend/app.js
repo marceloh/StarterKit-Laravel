@@ -10,6 +10,7 @@ import { modal } from 'momentum-modal'
 import quasarIconSet from 'quasar/icon-set/svg-mdi-v6'
 import axios from 'axios'
 import Notifications from '@kyvg/vue3-notification'
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
@@ -22,6 +23,7 @@ createInertiaApp({
     return createApp({ render: () => h(app, props) })
       .use(createPinia())
       .use(plugin)
+      .use(ZiggyVue)
       .use(Notifications)
       .use(Quasar, {
         iconSet: quasarIconSet
