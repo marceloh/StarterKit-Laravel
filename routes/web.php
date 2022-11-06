@@ -42,6 +42,8 @@ Route::get('/dashboard', function () {
 Route::get('/account', 'App\Http\Controllers\UserController@index')->middleware(['auth', 'verified'])->name('account.index');
 Route::post('/account', 'App\Http\Controllers\UserController@store')->middleware(['auth', 'verified'])->name('account.store');
 
+Route::get('/products', 'App\Http\Controllers\ProductController@index')->middleware(['auth', 'verified'])->name('products.index');
+
 Route::post('/notify/{type}', function ($type) {
     return back()->toast('This notification comes from the server side =)', $type);
 });

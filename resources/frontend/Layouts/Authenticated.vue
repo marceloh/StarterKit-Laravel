@@ -45,6 +45,15 @@
           </template>
           Account
         </NavLink>
+        <NavLink
+          :href="route('products.index')"
+          :active="route().current('products.index')"
+        >
+          <template #icon>
+            <i-mdi-account-outline />
+          </template>
+          Products
+        </NavLink>
       </NavList>
     </NavDrawer>
 
