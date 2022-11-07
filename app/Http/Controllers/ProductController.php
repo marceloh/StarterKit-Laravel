@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -11,18 +13,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        dd($products);
-        return Inertia::render('Products/index', [
+        return Inertia::render('Products', [
             'title' => 'Products',
-            'products' => $products,
+            'products' => $products
         ]);
     }
 
-    public function get_all_product()
-    {
-        $products = Product::all();
-        return response()->json([
-            'products' => $products
-        ], 200);
-    }
+    // public function get_all_product()
+    // {
+    //     $products = Product::all();
+    //     return response()->json([
+    //         'products' => $products
+    //     ], 200);
+    // }
 }
