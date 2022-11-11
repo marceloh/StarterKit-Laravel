@@ -15,7 +15,7 @@
       >
         <form
           class="q-gutter-md"
-          @submit.prevent="product.post(route('products.store'))"
+          @submit.prevent="submit"
           @reset="onReset"
         >
           <q-input
@@ -62,6 +62,10 @@ const props = defineProps({
 })
 
 const product = useForm(props.product)
+
+function submit () {
+  Inertia.post('/products', product)
+}
 
 function onReset () {
   product.name = null

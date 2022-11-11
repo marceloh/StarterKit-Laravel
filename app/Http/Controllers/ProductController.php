@@ -23,15 +23,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            ray($request->all());
             $request->validate([
                 'name' => 'required|string|max:255',
             ]);
-            $product = new Product();
-            $product->save([$request->all()], ['touch' => true]);
-
-            ray($product);
-
+            Product::create($request->all());
             return back()->toast('This notification comes from the server side =)', 'success');
         } catch (\Throwable $th) {
             return back()->toast('This notification comes from the server side =) ' . $th->getMessage(), 'error');

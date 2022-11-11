@@ -2,10 +2,6 @@
   <div class="tw-p-6">
     <Head :title="title" />
 
-    <h1 class="text-h4">
-      {{ title }}
-    </h1>
-
     <DialogLink href="/products/dialog/modal">
       <q-btn
         class="tw-mb-2 tw-mr-2"
@@ -16,7 +12,10 @@
         Novo
       </q-btn>
     </DialogLink>
-    <q-table :rows="products" />
+    <q-table
+      :title="title"
+      :rows="products"
+    />
   </div>
 </template>
 <script setup>
