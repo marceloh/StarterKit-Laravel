@@ -26,10 +26,7 @@ class UserController extends Controller
         try {
 
             $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'password_confirmation' => ['required', 'same:password']
+                'name' => 'required|string|max:255'
             ]);
 
             ray($request->all());
@@ -37,7 +34,6 @@ class UserController extends Controller
 
             $user->update([
                 'name' => $request->name,
-                'email' => $request->email
             ], ['touch' => false]);
             ray($user);
 

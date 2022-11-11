@@ -3,7 +3,7 @@
     <q-card class=" tw-text-white">
       <q-toolbar class="tw-bg-primary-600">
         <q-toolbar-title>
-          {{ title }} leras
+          {{ title }}
         </q-toolbar-title>
       </q-toolbar>
       <q-card-section class="tw-bg-primary-500">
@@ -13,35 +13,23 @@
         class="q-pa-md"
         style="max-width: 400px"
       >
-        <q-form
+        <form
           class="q-gutter-md"
-          @submit="onSubmit"
+          @submit.prevent="product.post(route('products.store'))"
           @reset="onReset"
         >
           <q-input
-            v-model="name"
-            filled
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
+            v-model="product.name"
+            name="product"
+            placeholder="Produto"
           />
 
           <q-input
-            v-model="age"
-            filled
-            type="number"
-            label="Your age *"
-            lazy-rules
-            :rules="[
-              val => val !== null && val !== '' || 'Please type your age',
-              val => val > 0 && val < 100 || 'Please type a real age'
-            ]"
-          />
-
-          <q-toggle
-            v-model="accept"
-            label="I accept the license and terms"
+            v-model="product.description"
+            name="description"
+            label="Your description *"
+            hint="Description"
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
           <div>
@@ -58,16 +46,25 @@
               class="q-ml-sm"
             />
           </div>
-        </q-form>
+        </form>
       </div>
     </q-card>
   </Modal>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   title: String,
   message: String,
-  position: String
+  position: String,
+  product: Object,
+  errors: Object
 })
+
+const product = useForm(props.product)
+
+function onReset () {
+  product.name = null
+  product.description = null
+}
 </script>

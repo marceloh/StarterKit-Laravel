@@ -27,6 +27,7 @@
         v-model="user.email"
         name="email"
         placeholder="Email"
+        readonly="readonly"
         :rules="[requiredRule]"
       />
 

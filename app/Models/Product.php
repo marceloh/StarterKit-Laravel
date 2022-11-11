@@ -12,10 +12,10 @@ class Product extends Model
     use HasFactory, HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'id',
         'name',
         'description',
         'quantity',
         'price',
+        'qtd_acessos',
     ];
 }
