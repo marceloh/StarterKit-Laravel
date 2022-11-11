@@ -6,7 +6,7 @@
       {{ title }}
     </h1>
 
-    <DialogLink href="/dialog/modal">
+    <DialogLink href="/products/dialog/modal">
       <q-btn
         class="tw-mb-2 tw-mr-2"
         outline
