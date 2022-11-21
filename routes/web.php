@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,7 @@ Route::get('/dashboard', function () {
 Route::get('/account', 'App\Http\Controllers\UserController@index')->middleware(['auth', 'verified'])->name('account.index');
 Route::post('/account', 'App\Http\Controllers\UserController@store')->middleware(['auth', 'verified'])->name('account.store');
 
-Route::get('/products', 'App\Http\Controllers\ProductController@index')->middleware(['auth', 'verified'])->name('products.index');
-Route::post('/products', 'App\Http\Controllers\ProductController@store')->middleware(['auth', 'verified'])->name('products.store');
+Route::resource('/products', ProductController::class);
 Route::get('/products/dialog/{type}/{position?}', 'App\Http\Controllers\ProductController@modal')->middleware(['auth', 'verified'])->name('products.modal');
 
 Route::post('/notify/{type}', function ($type) {
