@@ -44,7 +44,8 @@ Route::get('/account', 'App\Http\Controllers\UserController@index')->middleware(
 Route::post('/account', 'App\Http\Controllers\UserController@store')->middleware(['auth', 'verified'])->name('account.store');
 
 Route::resource('/products', ProductController::class);
-Route::get('/products/dialog/{type}/{position?}', 'App\Http\Controllers\ProductController@modal')->middleware(['auth', 'verified'])->name('products.modal');
+//Route::get('/products/dialog/{type}/{position?}', 'App\Http\Controllers\ProductController@modal')->middleware(['auth', 'verified'])->name('products.modal');
+Route::get('/products/dialog/{type}/{position?}/{product?}', 'App\Http\Controllers\ProductController@modal')->middleware(['auth', 'verified'])->name('products.modal');
 
 Route::post('/notify/{type}', function ($type) {
     return back()->toast('This notification comes from the server side =)', $type);

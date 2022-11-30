@@ -25,7 +25,7 @@
               color="blue"
               dense
               size="sm"
-              @click="edit(props.row)"
+              @click="edit(props.row.id)"
             >
               <i-material-symbols-edit />
             </q-btn>
@@ -55,14 +55,14 @@ function addRow () {
   Inertia.get(route('products.modal', 'modal'))
 }
 
+function edit (id) {
+  Inertia.get('products/dialog/modal/null/' + id)
+}
+
 function destroy (id) {
   if (confirm('Are you sure you want to Delete')) {
     Inertia.delete(route('products.destroy', id))
   }
-}
-
-function edit (product) {
-  Inertia.get(route('products.modal', 'modal'))
 }
 
 const columns = [

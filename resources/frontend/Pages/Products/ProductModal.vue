@@ -53,6 +53,8 @@
 </template>
 
 <script setup>
+import { Inertia } from '@inertiajs/inertia'
+
 const props = defineProps({
   title: String,
   message: String,

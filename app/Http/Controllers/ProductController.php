@@ -21,19 +21,45 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd('store');
-        // try {
-        //     $request->validate([
-        //         'name' => 'required|string|max:255',
-        //     ]);
-        //     Product::create($request->all());
-        //     return back()->toast('This notification comes from the server side =)', 'success');
-        // } catch (\Throwable $th) {
-        //     return back()->toast('This notification comes from the server side =) ' . $th->getMessage(), 'error');
-        // }
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+            if($request->id){
+                $Product = Product::findOrFail($request->id);
+                $Product->update($request->all());
+                return back()->toast('This notification comes from the server side =)', 'success');
+            }
+            Product::create($request->all());
+            return back()->toast('This notification comes from the server side =)', 'success');
+        } catch (\Throwable $th) {
+            return back()->toast('This notification comes from the server side =) ' . $th->getMessage(), 'error');
+        }
     }
 
-    public function modal($type, $position = null)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function update($product)
+    {
+        dd($product);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+            $Product = Product::findOrFail($id);
+            $Product->update($request->all());
+            return back()->toast('This notification comes from the server side =)', 'success');
+        } catch (\Throwable $th) {
+            return back()->toast('This notification comes from the server side =) ' . $th->getMessage(), 'error');
+        }
+    }
+
+    public function modal($type, $position = null, $productId = null)
     {
         $page = [
             'modal' => 'Products/ProductModal',
@@ -41,6 +67,8 @@ class ProductController extends Controller
         ][$type];
 
         $product = new Product();
+        if($productId != null)
+            $product = Product::find($productId);
 
         return Inertia::modal($page)
             ->with([
@@ -77,32 +105,6 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // dd('show');
-        // try {
-        //     $request->validate([
-        //         'descricao' => 'required',
-        //         //'username' => 'required'
-        //     ]);
-
-        //     $Product = Product::findOrFail($id);
-        //     $Product->update($request->all());
-        //     //Log::channel('daily')->info('O usuário: '.$request->username.' atualizou o Product de id: '.$Product->id.'!');
-
-        //     return response()->json(['message' => 'Registro atualizado com sucesso!'], 200);
-        // } catch (\Exception $e) {
-        //     return response()->json(['message' => 'erro ao tentar atualizar! ' . $e], 500);
-        // }
     }
 
     /**
